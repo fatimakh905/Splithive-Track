@@ -1,0 +1,279 @@
+﻿<Page x:Class="SplitHive.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Dashboard"
+      Background="White">
+
+    <!-- ================= RESOURCES (MUST BE BEFORE USAGE) ================= -->
+    <Page.Resources>
+
+        <!-- Palette -->
+        <SolidColorBrush x:Key="BgLight" Color="#EEEEEE"/>
+        <SolidColorBrush x:Key="PanelBeige" Color="#D8C9A7"/>
+        <SolidColorBrush x:Key="PrimaryGreen" Color="#5C6F2B"/>
+        <SolidColorBrush x:Key="AccentOrange" Color="#DE802B"/>
+        <SolidColorBrush x:Key="TextDark" Color="#24324D"/>
+
+        <!-- Nav link-style button -->
+        <Style x:Key="NavButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Margin" Value="0,2"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+
+        <!-- Section heading in nav -->
+        <Style x:Key="NavSectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource PrimaryGreen}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0,14,0,6"/>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ================= LEFT NAV PANEL ================= -->
+        <Border Grid.Column="0" Background="{StaticResource BgLight}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="16">
+
+                    <!-- Profile -->
+                    <Ellipse Width="96" Height="96" Margin="0,14,0,10" HorizontalAlignment="Center">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="Profile.jpeg"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <TextBlock x:Name="UserGreeting"
+                               Text="Hello, User!"
+                               FontSize="22"
+                               Margin="0,8,0,16"
+                               FontFamily="Script MT Bold"
+                               Foreground="{StaticResource PrimaryGreen}"
+                               HorizontalAlignment="Center"/>
+
+                    <!-- Budget Overview -->
+                    <TextBlock Text="Budget Spendings"
+                               Style="{StaticResource NavSectionTitleStyle}"
+                               Margin="0,0,0,6"/>
+
+                    <ProgressBar x:Name="BudgetProgress"
+                                 Height="22"
+                                 Width="220"
+                                 Foreground="{StaticResource PrimaryGreen}"
+                                 Background="{StaticResource PanelBeige}"
+                                 FontSize="9"/>
+
+                    <TextBlock x:Name="BudgetText"
+                               FontSize="13"
+                               Foreground="{StaticResource TextDark}"
+                               Width="220"
+                               TextWrapping="Wrap"
+                               Margin="0,6,0,0"/>
+
+                    <!-- Notifications -->
+
+                    <!-- NAV LINKS (Quick Actions moved here) -->
+                    <TextBlock Text="Navigation"
+                               Style="{StaticResource NavSectionTitleStyle}"/>
+
+                    <Border Background="White" CornerRadius="10" Padding="8" BorderBrush="{StaticResource PanelBeige}" BorderThickness="1">
+                        <StackPanel>
+
+                            <!-- These are your SAME buttons, just styled like links -->
+                            <Button Content="➜ Add Personal Expense"
+                                    Click="AddPersonalExpense_Click"
+                                    Style="{StaticResource NavButtonStyle}"/>
+
+                            <Button Content="➜ Personal Expense History"
+                                    Click="ViewHistory_Click"
+                                    Style="{StaticResource NavButtonStyle}"/>
+
+                            <Button Content="➜ View Groups"
+                                    Click="ViewGroups_Click"
+                                    Style="{StaticResource NavButtonStyle}"/>
+
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Text="🔔 Notifications"
+                               Style="{StaticResource NavSectionTitleStyle}"/>
+
+                    <!-- Fun tip -->
+                    <Border Background="#FFFDE7" CornerRadius="8" Padding="10" Margin="0,14,0,10">
+                        <TextBlock Text="💡 Tip: Don’t spend more than you remember!"
+                                   FontStyle="Italic"
+                                   Foreground="#FF814A36"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"/>
+                    </Border>
+
+                    <!-- Logout -->
+                    <Button Content="Logout"
+                            Margin="0,12,0,0"
+                            Padding="10,8"
+                            Background="{StaticResource AccentOrange}"
+                            Foreground="White"
+                            Click="LogoutButton_Click"
+                            BorderThickness="0"
+                            FontWeight="Bold"
+                            Cursor="Hand"
+                            FontSize="14">
+                        <Button.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="6" ShadowDepth="1" Opacity="0.25"/>
+                        </Button.Effect>
+                    </Button>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- ================= MAIN CONTENT ================= -->
+        <ScrollViewer Grid.Column="1" Margin="20,24,20,12">
+            <StackPanel>
+
+                <!-- Cards (YOUR ORIGINAL CODE - KEPT) -->
+                <UniformGrid Columns="4" Rows="1" Margin="0,0,0,20" HorizontalAlignment="Stretch" Height="180">
+
+                    <!-- Total Expenses Card -->
+                    <Border CornerRadius="10" Padding="15" Margin="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#64B5F6" Offset="0"/>
+                                <GradientStop Color="#FF144E7B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.25"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="💰 Total Expenses" FontWeight="Bold" Foreground="#FF050C39" FontSize="23.5"/>
+                            <TextBlock x:Name="TotalExpensesCard" FontSize="20" Foreground="White" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Remaining Budget Card -->
+                    <Border CornerRadius="10" Padding="15" Margin="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#FFCC80" Offset="0"/>
+                                <GradientStop Color="#FF8F4D0A" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.25"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="🏦 Remaining Budget" FontWeight="Bold" Foreground="#FF342306" FontSize="23.5"/>
+                            <TextBlock x:Name="RemainingBudgetCard" FontSize="20" Foreground="White" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Total Groups Card -->
+                    <Border CornerRadius="10" Padding="15" Margin="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#A5D6A7" Offset="0"/>
+                                <GradientStop Color="#FF08540B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.25"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="👥 Total Groups" FontWeight="Bold" Foreground="#FF073105" FontSize="23.5"/>
+                            <TextBlock x:Name="TotalGroupsCard" FontSize="20" Foreground="White" Margin="0,5,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Pending Settlements Card -->
+                    <Border CornerRadius="10" Padding="15" Margin="5">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#F48FB1" Offset="0"/>
+                                <GradientStop Color="#FF9B0A3E" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="2" Opacity="0.25"/>
+                        </Border.Effect>
+                        <StackPanel>
+                            <TextBlock Text="⚖️ Pending Settlements" FontWeight="Bold" Foreground="#FF2C062E" FontSize="23.5"/>
+                            <TextBlock x:Name="PendingSettlementsCard" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+
+                </UniformGrid>
+
+                <!-- Quick Actions (REMOVED from here intentionally because moved to NAV) -->
+
+                <!-- Recent Expenses Title -->
+                <TextBlock Text="Recent Expenses"
+                           FontSize="20"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource PrimaryGreen}"
+                           Margin="0,0,0,10"/>
+
+                <!-- Recent Expenses Table in a Card -->
+                <Border Background="White" CornerRadius="10" Padding="10" BorderBrush="{StaticResource PanelBeige}" BorderThickness="1">
+                    <DataGrid x:Name="RecentExpensesGrid"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              AlternatingRowBackground="#F3F3F3"
+                              GridLinesVisibility="Horizontal"
+                              HeadersVisibility="Column"
+                              Background="#FFF3F3F3">
+
+                        <!-- Header styling -->
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Foreground" Value="{StaticResource PrimaryGreen}"/>
+                                <Setter Property="Background" Value="#FFDFE2C5"/>
+                                <Setter Property="Padding" Value="8,6"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <!-- Row styling -->
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="MinHeight" Value="32"/>
+                            </Style>
+                        </DataGrid.RowStyle>
+                        
+                        
+
+                        <DataGrid.Columns>
+                            
+                            <DataGridTextColumn Header="Date" Binding="{Binding Date}" Width="*"/>
+                            <!-- Description -->
+                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="*"/>
+                            <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

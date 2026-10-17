@@ -1,0 +1,20 @@
+﻿SplitHive
+
+
+winexe
+C#
+.cs
+E:\5th_Semester\Advanced Programming Techniques\SplitHive\obj\Debug\net8.0-windows\
+SplitHive
+none
+false
+TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+E:\5th_Semester\Advanced Programming Techniques\SplitHive\App.xaml
+82143746585
+
+12-600835380
+202-2129538116
+DashboardPage.xaml;ExpenseHistoryPage.xaml;GroupListPage.xaml;GroupSettle.xaml;LoginPage.xaml;MainWindow.xaml;PersonalExpensePage.xaml;SignupPage.xaml;
+
+False
+
